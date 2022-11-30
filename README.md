@@ -121,6 +121,7 @@ Your third channel injector wire will need to be neatly tucked into the factory 
 
 Now you have a dynamic injector harness that you can swap the setup as per your requirements.
 In our case, we have two adapters for paired and batched. 
+
 ![image](https://user-images.githubusercontent.com/119147626/204685290-036e6773-328a-487f-b7bb-91d2e83cb272.png)
 
 
