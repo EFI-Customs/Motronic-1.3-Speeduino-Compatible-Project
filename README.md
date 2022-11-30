@@ -64,10 +64,15 @@ With this method, we still retain the factory green coil wire to provide switche
 
 #### Ignition wiring continued
 We have used a GM V6 Coil Pack with a gutted and re-wired DFI module.
+
 Reference Delphi Coil Pack Part Number: GN10123
+
 Reference Delphi DFI Module Part Number: CM414
+
 Reference DFI Module wiring guide: https://www.e30zone.net/e30wiki/images/9/9a/Gmgutted.jpg
+
 Another wiring reference image: http://i.imgur.com/Q9WdHVS.png
+
 
 Use a multimeter to ensure you have connected the respective wires to the appropriate pins on the DFI Module.
 +12V should be a shared pin across all three pairs of pins (usually the left pin on each pair)
