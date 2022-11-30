@@ -14,7 +14,7 @@ These are purely used as a starting point to get your project going without havi
 It is also important to verify your timing with a light before you crank your engine with injectors firing, otherwise you may cause some damage to your motor (not good!). 
 These base maps have been preset to be 50deg ATDC (After Top Dead Centre, as opposed to the typical Before Top Dead Centre values used in other kinds of standalone ECU's), which seems to be a typical expected value on a stock M20 running factory single ignition coil. 
 
-Lastly, these base maps have been built under the assumption that a MAX992x based VR Conditioner for the crank sensor. As such, the Trigger Edge is set to RISING. If you are running another type of VR Conditioner or you've converted to Hall Effect then please ensure you have checked this setting before cranking.
+Lastly, these base maps have been built under the assumption that a MAX992x based VR Conditioner for the crank sensor. As such, the Trigger Edge is set to RISING. If you are running another type of VR Conditioner or you've converted to Hall Effect then please ensure you have checked this setting before cranking. Remember that if you have switched over to a Hall Effect crank sensor then you need to change jumper configuration on the PCB. There is a jumper configuration table located on the silkscreen underneath where the Arduino mounts.
 
 You can also achieve your own base map by using the Speeduino base maps found here: [Official and user contributed base tunes for Speeduino installations](https://github.com/speeduino/Tunes)
 
@@ -26,14 +26,14 @@ For the Motronic 1.3 compatible ECU, please ensure you have done;
 Assuming you are keeping your AFM, unplug the AFM connector and add wires to pins 1 & 4 on the plug and connect them to pins 1 & 4 on the AFM. 
 Doing so allows us to utilise the factory intake air temperature sensor. 
 
-The reason we need to unplug pins 2 & 3 is because they go to the External MAP and +5V line on the ECU on factory pins 7 and 12 respectively. 
+The reason we need to unplug pins 2 & 3 is because they go to the External MAP and +5V line on the ECU pins 7 and 12 respectively. 
 If you do not do this, you will find that your MAP reading will halve, and you will experience signal noise.
 
 If you intend to delete the AFM, you can instead run any generic intake temperature sensor. A very popular one is an Open Element GM IAT sensor. Again, you can just wire this sensor into the factory AFM harness (pins 1 & 4).
 
 ### TPS
 If you want to start the car without re-wiring the TPS, simply unplug it and manually enter values in the TPS calibration window to spoof readings. 
-However, on a full implementation of this board it is required to convert to an M50 style TPS.
+However, on a full implementation of this board it is highly recommended to convert to an M50 style TPS.
 
 To convert your TPS to the M50 one you need to do the following:
 
@@ -45,7 +45,7 @@ To convert your TPS to the M50 one you need to do the following:
 
 If you are running factory ignition and you have the cylinder 1 pulse sensor attached (image link here: https://www.r3vlimited.com/board/filedata/fetch?id=7225671) you need to unplug the sensor from the engine harness. 
 
-The Motronic PCB's support individual coil-on-plug for up to 4 cyl engines (needs Cam Position Sensor retrofitted) and wasted-spark for 6-cyl engines.
+The Motronic PCB's support individual coil-on-plug for up to 4 cyl engines (needs Cam Position Sensor retrofitted) and wasted-spark for 6-cyl engines. To retrofit a cam sensor you can re-use the cylinder 1 pulse sensor plug on the engine harness side. A MAX9926 VR Conditioner accepts two inputs (crank + cam).
 
 The principle remains similar for both platforms, but we will cover the most common Wasted Spark conversion for an M20.
 
@@ -89,26 +89,31 @@ Connect the new wiring from the DFI module into your Motronic PCB External Ignit
 #### TunerStudio settings
 With wasted spark installed, you will need to change a few things in your tune file.
 
-Firstly, you need to go into "Settings" -> "Trigger Setup" and change the Trigger Angle from 50 to 276. The M20 has a trigger angle of 84 deg BTDC. 360 - 84 = 276. **This trigger angle is a starting reference point and shouldn't be your final value until you have verified this with a timing light!!** Our 2.9 stroker M20 reads 88 deg BTDC which equates to 272 ATDC trigger angle.
+Firstly, you need to go into `"Settings" -> "Trigger Setup"` and change the `Trigger Angle` from `50` to `276`. The M20 has a trigger angle of 84 deg BTDC. 
+360 - 84 = 276. **This trigger angle is a starting reference point and shouldn't be your final value until you have verified this with a timing light!!** 
+Our 2.9 stroker M20 reads 88 deg BTDC which equates to 272 ATDC trigger angle.
 
-Secondly, go to "Spark" -> "Spark Settings" and change "Spark Output Mode" to "Wasted Spark".
+Secondly, go to `"Spark" -> "Spark Settings"` and change `"Spark Output Mode"` to `"Wasted Spark"`.
 That's it! Wasted Spark is now ready to go.
 
 ### Injection
 The factory injector wiring is designed to run in a batched manner. Unfortunately, the Speeduino firmware does not support batched injection. To make this work our base maps use untimed or simultaneous injection. 
-This isn't perfect and will likely run rich. The best approach for this is to convert our injector wiring to a paired setup.
+This isn't perfect and will likely run rich. Tuning this also becomes rather difficult. 
+The best approach for this is to convert our injector wiring to a paired setup.
 
 Thankfully, this can be done in such a manner than you can reverse it. 
 I don't intend to advertise the below method as being the perfect option, but it was an option that suited our needs to be able to revert injector wiring as per requirements.
 Using a Series 1 E30 M20 injector harness, we have split all wires apart.
-Then we run each brown/yellow and brown/white wire to a 6 plug Deutch connector labelling them 1 through to 6 respectively.
+Then we run each brown/yellow (cyls 2,4,6) and brown/white (1,3,5) wire to a 6 plug Deutch connector labelling them 1 through to 6 respectively. Use a multimeter to verify which wire goes to which injector.
 We then also separate the temperature sensor wires and wire them into a 4 plug Deutch Connector.
 
-The engine harness needs to have a 4 pin Deutch connector wired to the temperature sensor wires, and another 4 pin Deutch connector for Injector Channel 1, 2, 3 and ground.
+The engine harness needs to have a 4 pin Deutch connector wired to the temperature sensor wires, and another 4 pin Deutch connector for Injector Channel 1, 2, 3 and  injector ground.
 
 Time to make a little adapter! 
 Grab a 6 plug Deutch Connector and wire it the same as the previous 6 plug Deutch connector that now houses the injector wires. 
 Now on the other end we will merge cylinders 1 & 6 to channel 1, cylinders 2 & 5 to channel 2, and cylinders 3 & 4 to channel 3 and wire them into a 4 plug Deutch connector with the same layout as the engine harness plug. Finally, grab all the injector ground wires and merge them into one thick cable (We used 12AWG wire to achieve this) and wire it into the last open port on the 4 plug Deutch connector.
+
+![image](https://user-images.githubusercontent.com/119147626/204684690-f8ce2eee-9a6a-4b58-8c86-ba1dd6574aa2.png)
 
 Do the same for the temperature sensors.
 
