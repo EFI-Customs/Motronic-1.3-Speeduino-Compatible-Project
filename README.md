@@ -19,7 +19,7 @@ Lastly, these base maps have been built under the assumption that a MAX992x base
 You can also achieve your own base map by using the Speeduino base maps found here: [Official and user contributed base tunes for Speeduino installations](https://github.com/speeduino/Tunes)
 
 ## Motronic 1.3 General Information & Observations
-These instructions are designed for the V1.7 Motronic 1.3 Board. V2.x instructions will be made available early in 2023.
+These instructions are designed for the V1.7 Motronic 1.3 Board.
 For the Motronic 1.3 compatible ECU, please ensure you have done;
 
 ### Air Flow Meter (AFM)
