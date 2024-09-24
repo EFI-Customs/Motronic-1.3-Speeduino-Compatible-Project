@@ -101,29 +101,21 @@ The factory injector wiring is designed to run in a batched manner. Unfortunatel
 This isn't perfect and will likely run rich. Tuning this also becomes rather difficult. 
 The best approach for this is to convert our injector wiring to a paired setup.
 
-Thankfully, this can be done in such a manner than you can reverse it. 
-I don't intend to advertise the below method as being the perfect option, but it was an option that suited our needs to be able to revert injector wiring as per requirements.
-Using a Series 1 E30 M20 injector harness, we have split all wires apart.
-Then we run each brown/yellow (cyls 2,4,6) and brown/white (1,3,5) wire to a 6 plug Deutch connector labelling them 1 through to 6 respectively. Use a multimeter to verify which wire goes to which injector.
-We then also separate the temperature sensor wires and wire them into a 4 plug Deutch Connector.
+This process can be done in a way that makes it fully reversible. While it's not necessarily the perfect solution, it worked for us when we needed to revert the injector wiring to meet specific requirements.
 
-The engine harness needs to have a 4 pin Deutch connector wired to the temperature sensor wires, and another 4 pin Deutch connector for Injector Channel 1, 2, 3 and  injector ground.
+Starting with a Series 1 E30 M20 injector harness (this can be done with a series 2 harness, but requires a bit more finesse), we separated all the wires. We routed the brown/yellow wires (cylinders 2, 4, 6) and the brown/white wires (cylinders 1, 3, 5) to a 6-pin Deutsch connector, labeling them 1 through 6 accordingly. A multimeter was used to verify the correct wiring for each injector.
 
-Time to make a little adapter! 
-Grab a 6 plug Deutch Connector and wire it the same as the previous 6 plug Deutch connector that now houses the injector wires. 
-Now on the other end we will merge cylinders 1 & 6 to channel 1, cylinders 2 & 5 to channel 2, and cylinders 3 & 4 to channel 3 and wire them into a 4 plug Deutch connector with the same layout as the engine harness plug. Finally, grab all the injector ground wires and merge them into one thick cable (We used 12AWG wire to achieve this) and wire it into the last open port on the 4 plug Deutch connector.
+We also separated the temperature sensor wires and connected them to a 4-pin Deutsch connector.
 
-![image](https://user-images.githubusercontent.com/119147626/204684690-f8ce2eee-9a6a-4b58-8c86-ba1dd6574aa2.png)
+The engine harness requires two 4-pin Deutsch connectors—one for the temperature sensor wires, and another for Injector Channels 1, 2, and 3, along with the injector 12V+ (which typically comes into the from the main relay/DME relay).
 
-Do the same for the temperature sensors.
+Next, it's time to create an adapter. Take a 6-pin Deutsch connector and wire it to match the one on the injector harness. On the other end, merge the injector pairs: cylinders 1 & 6 to Channel 1, cylinders 2 & 5 to Channel 2, and cylinders 3 & 4 to Channel 3. Wire these into a 4-pin Deutsch connector that aligns with the engine harness plug. Lastly, combine all the injector 12V+ wires (these are Red/White) into a single thicker cable (we used 12AWG wire for this) and connect it to the final open port on the 4-pin Deutsch connector.
 
-Your third channel injector wire will need to be neatly tucked into the factory harness and brought back to the ECU where it will connect into the 3rd Channel output (bottom left) on the External Injector Connector on the PCB.
+For the third injector channel, route the wire neatly into the factory harness and run it back to the ECU, where it connects to the 3rd Channel output (bottom left) on the External Injector Connector of the PCB.
 
-Now you have a dynamic injector harness that you can swap the setup as per your requirements.
-In our case, we have two adapters for paired and batched. 
+This setup gives you a flexible injector harness that can be adjusted as needed. In our case, we created two adapters—one for paired injectors and one for batch firing.
 
-![image](https://user-images.githubusercontent.com/119147626/204685290-036e6773-328a-487f-b7bb-91d2e83cb272.png)
-
+![1_diagram](https://github.com/user-attachments/assets/cb4537be-59c8-4f1d-95c0-5108629a6452)
 
 ### MAP/Vacuum
 Run a vacuum hose from the intake manifold to where your ECU is installed. You can get a T-Piece adapter and run the vacuum hose from between the intake manifold and the fuel pressure regulator.
