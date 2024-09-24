@@ -115,7 +115,8 @@ For the third injector channel, route the wire neatly into the factory harness a
 
 This setup gives you a flexible injector harness that can be adjusted as needed. In our case, we created two adapters—one for paired injectors and one for batch firing.
 
-![1_diagram](https://github.com/user-attachments/assets/cb4537be-59c8-4f1d-95c0-5108629a6452)
+![1_diagram](https://github.com/user-attachments/assets/b5d66e6f-1980-4a3b-84aa-9f206cef1b1c)
+
 
 ### MAP/Vacuum
 Run a vacuum hose from the intake manifold to where your ECU is installed. You can get a T-Piece adapter and run the vacuum hose from between the intake manifold and the fuel pressure regulator.
