@@ -10,7 +10,6 @@ Please note the conversion from Jetronic to Motronic in this guide does not use 
 - Motronic 1.1/1.3 crank position sensor
 - Motronic 1.3 female connector (side that connects to the ECU) with fly-leads
 - Aftermarket air temperature sensor
-- Motronic 1.3 coolant temperature sensor
 - **Optional** 3bar fuel pressure regulator upgrade
 
 
@@ -24,7 +23,6 @@ The following table will outline Jetronic connector pin numbers and their respec
 | Description                       | Jetronic Pin | Jetronic Colour | Motronic/Destination Pin |
 | --------------------------------- | ------------ | --------------- | ------------------------ |
 | Tachometer                        | C104 Pin 1   | BL/BU           | 6                        |
-| Start input - to ignition switch  | 4            | BK/YL           | 27                       |
 | Switched power from main relay    | 9            | RD/WT           | 37                       |
 | AFM Air temp - pin 1*             | 8            | GR/VI           | 44                       |
 | Coolant temp input                | 10           | BR/RD           | 45                       |
@@ -35,26 +33,42 @@ You will also need to join all of the ground wires accordingly.
 
 ## Custom wiring
 
-### Main Relay
+### Main Relay + Fuel Pump Relay
 
 Since the Jetronic system does not have a main relay, we will need to wire one in.
-There's a few different ways to do this but we will stick to an OEM design.
+There's a few different ways to do this but we will simplify it.
 
 Using the [DME - E30 Zone Wiki](https://www.e30zone.net/e30wiki/index.php?title=DME#Operation) article we can get the neccessary wiring information for the main relay.
 In short:
 - DME Relay pins 30 and 86 are to be connected to constant, unfused 12V
 - DME Relay pin 85 goes to pin 36 of the M1.3 harness
-- Ignition being turned on should provide 12V to pin 27, which should ground pin 36 thus activating the DME relay
+- Ignition being turned on should provide 12V to pin 27 on M1.3 harness, which should ground pin 36 on M1.3 harness thus activating the DME relay
 - DME Relay pins 30 and 87 bridge upon activation, supplying power to the fuel pump, injectors and to pin 37 of the M1.3 harness (which we have outlined in the previous table)
+
+With all of this in mind, to simplify the setup we don't need:
+- Switched 12V to pin 27 on M1.3 harness
+- No grounding of pin 36 on M1.3 harness
+- Main relay powering the fuel  (though you can do this if you wish)
+
+We can also remove the old 7 pin fuel pump relay, and re-use some of the wires for our new relays.
+Namely, we can cut the following wires from the 7-pin relay:
+- pin 15 - Switched 12v
+- pin 31 - Ground
+- Pin 30 - Unfused 12v
+- Pin 87 - 12v to fuel pump
+
+Using the above wires, we can make up the main relay using pins 15, 31 and 30 to pins 85, 86 and 30 respectively. Then a new wire going from pin 87 on the relay to pin 37 on the M1.3 harness and a split that provides injectors with a common 12V. Optionally, you may also use another split from DME relay pin 87 to activate the fuel pump relay.
+<img width="939" alt="maain-relay" src="https://github.com/user-attachments/assets/bb969703-e01d-435d-9874-10142dcfc6f3">
+
+Likewise with the fuel pump relay, we can make up relay using pins 15, 31 and 30 to pins 85, 86 and 30 respectively.
+Lastly, wire pin 87 from the 7 pin relay to pin 87 on the new relay to provide the fuel pump with 12v.
+<img width="841" alt="fuel-relay (1)" src="https://github.com/user-attachments/assets/84edcfc5-3946-479c-82fe-97e204812cfc">
+
 
 ### Air Temperature Sensor
 
 We will need to plumb an air temperature sensor into the intake system. The easiest rule of thumb to stick to, is to plumb the sensor approximately where the AFM is located.
-Majority of aftermarket sensors work on the same principle of resistance comparison from a 5v reference. Pin 8 from the jetronic harness will go into the signal pin on the temperature sensor, the ground pin on the sensor can be supplied from a ground wire on the engine harness.
-
-### Coolant Temperature Sensor
-
-This is a simple replacement procedure which requires the blue coolant sensor for a M1.3 system.
+Majority of aftermarket sensors work on the same principle of resistance comparison from a 5v reference. Pin 8 from the jetronic harness will go into the signal pin on the temperature sensor, the ground pin on the sensor can be supplied from a ground wire on the engine harness. Note that pin 8 on the jetronic harness goes to pin 1 on the AFM connector.
 
 ### Crank Trigger wheel
 
