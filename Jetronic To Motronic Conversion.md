@@ -10,6 +10,7 @@ Please note the conversion from Jetronic to Motronic in this guide does not use 
 - Motronic 1.1/1.3 crank position sensor
 - Motronic 1.3 female connector (side that connects to the ECU) with fly-leads
 - Aftermarket air temperature sensor
+- Motronic 1.3 coolant temperature sensor
 - **Optional** 3bar fuel pressure regulator upgrade
 
 
@@ -69,6 +70,9 @@ Lastly, wire pin 87 from the 7 pin relay to pin 87 on the new relay to provide t
 
 We will need to plumb an air temperature sensor into the intake system. The easiest rule of thumb to stick to, is to plumb the sensor approximately where the AFM is located.
 Majority of aftermarket sensors work on the same principle of resistance comparison from a 5v reference. Pin 8 from the jetronic harness will go into the signal pin on the temperature sensor, the ground pin on the sensor can be supplied from a ground wire on the engine harness. Note that pin 8 on the jetronic harness goes to pin 1 on the AFM connector.
+
+### Coolant Temperature Sensor
+This is a simple replacement procedure which requires the blue coolant sensor for a M1.3 system.
 
 ### Crank Trigger wheel
 
