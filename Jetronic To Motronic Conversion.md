@@ -78,6 +78,10 @@ This is a simple replacement procedure which requires the blue coolant sensor fo
 
 The trigger wheel will require welding on to the crank pulley. You will then need to install the crank sensor mount to the engine block, and fasten the crank position sensor to it. Run the CPS wire along the front timing cover to underneath the intake manifold.
 
+Below is a reference image of where to position the trigger wheel relative to the original timing marks where the gap in green signifies the missing teeth on the trigger wheel.
+<img width="844" alt="image" src="https://github.com/user-attachments/assets/d5455021-abd7-4d0b-8260-57fc0c91b0c2">
+
+
 ### Crank position sensor
 
 Using some 2 core shielded wire:
