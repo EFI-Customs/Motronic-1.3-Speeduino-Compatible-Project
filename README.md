@@ -2,7 +2,7 @@
 
 This is the main repository containing base maps for various BMW engines utilising the Speeduino Compatible PCB's from EFI Customs.
 
-As well as this, you will find (eventually) documentation on building your own PCB's.
+As well as this, you will find documentation on building your own PCB's.
 
 
 # Base Maps
